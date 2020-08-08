@@ -2,7 +2,7 @@
 
 The `lspartition` package provides an R implementation of tuning parameter selection, point estimation, and pointwise and uniform inference procedures for partitioning-based least squares series estimators, including B-splines, wavelets, and piecewise polynomial regression estimators.
 
-This work was supported in part by the National Science Foundation through grant SES-1459931.
+This work was supported in part by the National Science Foundation through grant [SES-1459931](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1459931).
 
 ## R Implementation
 To install/update in R type:
