@@ -8,6 +8,10 @@ This work was supported in part by the National Science Foundation through grant
 
 https://nppackages.github.io/lspartition
 
+## Queries and Requests
+
+Please email: [lspartition@googlegroups.com](mailto:lspartition@googlegroups.com)
+
 ## R Implementation
 To install/update in R type:
 ```
