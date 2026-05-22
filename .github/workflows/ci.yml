@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  repository:
+    name: Repository checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Check repository layout
+        shell: bash
+        run: |
+          test -f README.md
+          test -f LICENSE.md
+          test -f R/lspartition/DESCRIPTION
+
+  r-check:
+    name: R CMD check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Set up Pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install R dependencies
+        run: |
+          repos <- c(RSPM = Sys.getenv("RSPM"), CRAN = "https://cloud.r-project.org")
+          install.packages(
+            c("ggplot2", "pracma", "mgcv", "combinat", "matrixStats", "MASS", "dplyr"),
+            repos = repos
+          )
+        shell: Rscript {0}
+
+      - name: Build R source package
+        run: R CMD build R/lspartition
+
+      - name: Check R package
+        run: R CMD check lspartition_*.tar.gz --no-manual
